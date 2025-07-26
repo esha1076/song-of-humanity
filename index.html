@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Song of Humanity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
+        }
+        
+        .orbitron {
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        
+        .glow-violet {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        .mic-pulse {
+            animation: micPulse 2s ease-in-out infinite;
+        }
+        
+        .mic-recording {
+            animation: micRecording 1s ease-in-out infinite;
+        }
+        
+        /* 3D Button Styles */
+        .btn-3d {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            border: none;
+            background: linear-gradient(145deg, #3b82f6, #1e40af);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(59, 130, 246, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-3d:hover {
+            transform: translateY(-2px) rotateX(5deg);
+            box-shadow: 
+                0 12px 24px rgba(0, 0, 0, 0.4),
+                0 6px 12px rgba(59, 130, 246, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-3d:active {
+            transform: translateY(1px) rotateX(-2deg);
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.3),
+                0 2px 4px rgba(59, 130, 246, 0.2),
+                inset 0 2px 4px rgba(0, 0, 0, 0.2),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-3d-violet {
+            background: linear-gradient(145deg, #8b5cf6, #6d28d9);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(139, 92, 246, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-3d-violet:hover {
+            box-shadow: 
+                0 12px 24px rgba(0, 0, 0, 0.4),
+                0 6px 12px rgba(139, 92, 246, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-3d-gold {
+            background: linear-gradient(145deg, #fbbf24, #d97706);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(251, 191, 36, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-3d-gold:hover {
+            box-shadow: 
+                0 12px 24px rgba(0, 0, 0, 0.4),
+                0 6px 12px rgba(251, 191, 36, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 3D Input Styles */
+        .input-3d {
+            position: relative;
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 
+                inset 0 4px 8px rgba(0, 0, 0, 0.4),
+                inset 0 -2px 4px rgba(255, 255, 255, 0.05),
+                0 2px 4px rgba(139, 92, 246, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .input-3d:focus {
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 
+                inset 0 4px 8px rgba(0, 0, 0, 0.4),
+                inset 0 -2px 4px rgba(255, 255, 255, 0.1),
+                0 4px 8px rgba(139, 92, 246, 0.2),
+                0 0 20px rgba(139, 92, 246, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        /* 3D Microphone Button */
+        .mic-3d {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #3b82f6, #1e40af);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(59, 130, 246, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mic-3d:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 12px 24px rgba(0, 0, 0, 0.4),
+                0 6px 12px rgba(59, 130, 246, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mic-3d:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+        
+        .mic-3d.recording {
+            background: linear-gradient(145deg, #ef4444, #dc2626);
+            animation: micRecording3D 1s ease-in-out infinite;
+        }
+        
+        /* 3D Toggle Switch */
+        .toggle-3d {
+            position: relative;
+            width: 3rem;
+            height: 1.5rem;
+            background: linear-gradient(145deg, #374151, #1f2937);
+            border-radius: 0.75rem;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.4),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.05),
+                0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-3d.active {
+            background: linear-gradient(145deg, #3b82f6, #1e40af);
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.1),
+                0 2px 4px rgba(59, 130, 246, 0.2);
+        }
+        
+        .toggle-dot-3d {
+            position: absolute;
+            top: 0.125rem;
+            left: 0.125rem;
+            width: 1.25rem;
+            height: 1.25rem;
+            background: linear-gradient(145deg, #f9fafb, #e5e7eb);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .toggle-3d.active .toggle-dot-3d {
+            transform: translateX(1.5rem);
+            background: linear-gradient(145deg, #ffffff, #f3f4f6);
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
+        }
+        
+        @keyframes micRecording3D {
+            0%, 100% { 
+                box-shadow: 
+                    0 8px 16px rgba(0, 0, 0, 0.3),
+                    0 4px 8px rgba(239, 68, 68, 0.4),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 12px 24px rgba(0, 0, 0, 0.4),
+                    0 6px 12px rgba(239, 68, 68, 0.6),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+            }
+        }
+        
+        @keyframes micPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes micRecording {
+            0%, 100% { 
+                box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+                background: linear-gradient(45deg, #dc2626, #b91c1c);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(239, 68, 68, 1);
+                background: linear-gradient(45deg, #ef4444, #dc2626);
+            }
+        }
+        
+        .toggle-bg.active {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+        }
+        
+        .toggle-bg.active .toggle-dot {
+            transform: translateX(1.5rem) translateY(0.125rem);
+        }
+        
+        .earth {
+            width: 280px;
+            height: 280px;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.8), transparent 35%),
+                radial-gradient(circle at 70% 30%, rgba(139, 92, 246, 0.7), transparent 40%),
+                radial-gradient(circle at 20% 60%, rgba(251, 191, 36, 0.6), transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.7), transparent 35%),
+                radial-gradient(circle at 50% 80%, rgba(34, 197, 94, 0.8), transparent 40%),
+                linear-gradient(135deg, #1e40af, #3730a3, #581c87, #7c2d12, #059669);
+            border-radius: 50%;
+            position: relative;
+            animation: earthRotate 25s linear infinite, earthFloat 8s ease-in-out infinite, earthPulse 6s ease-in-out infinite;
+            box-shadow: 
+                0 0 60px rgba(59, 130, 246, 0.5),
+                0 0 120px rgba(139, 92, 246, 0.3),
+                0 0 180px rgba(251, 191, 36, 0.2),
+                inset 0 0 60px rgba(0, 0, 0, 0.2),
+                inset -25px -25px 50px rgba(0, 0, 0, 0.3),
+                inset 25px 25px 50px rgba(255, 255, 255, 0.15);
+            border: 4px solid rgba(59, 130, 246, 0.4);
+        }
+        
+        .earth::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 8%;
+            width: 35%;
+            height: 25%;
+            background: 
+                radial-gradient(ellipse, #064e3b, #065f46, transparent 70%);
+            border-radius: 60% 40% 70% 30%;
+            animation: continentMove1 25s linear infinite;
+            opacity: 0.8;
+        }
+        
+        .earth::after {
+            content: '';
+            position: absolute;
+            bottom: 25%;
+            right: 15%;
+            width: 30%;
+            height: 20%;
+            background: 
+                radial-gradient(ellipse, #065f46, #047857, transparent 60%);
+            border-radius: 40% 60% 50% 80%;
+            animation: continentMove2 25s linear infinite;
+            opacity: 0.7;
+        }
+        
+        .earth-continent-3 {
+            position: absolute;
+            top: 45%;
+            left: 60%;
+            width: 25%;
+            height: 15%;
+            background: 
+                radial-gradient(ellipse, #064e3b, transparent 70%);
+            border-radius: 70% 30% 60% 40%;
+            animation: continentMove3 25s linear infinite;
+            opacity: 0.6;
+        }
+        
+        .earth-continent-4 {
+            position: absolute;
+            top: 60%;
+            left: 20%;
+            width: 20%;
+            height: 12%;
+            background: 
+                radial-gradient(ellipse, #065f46, transparent 65%);
+            border-radius: 50% 70% 40% 60%;
+            animation: continentMove4 25s linear infinite;
+            opacity: 0.5;
+        }
+        
+        .earth-atmosphere {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: calc(100% + 30px);
+            height: calc(100% + 30px);
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle, transparent 55%, rgba(59, 130, 246, 0.2) 65%, rgba(139, 92, 246, 0.3) 75%, rgba(251, 191, 36, 0.2) 85%, transparent 95%);
+            animation: atmosphereGlow 4s ease-in-out infinite, atmosphereRotate 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        .earth-clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15), transparent 25%),
+                radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.1), transparent 20%),
+                radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.12), transparent 22%),
+                radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.08), transparent 18%);
+            animation: cloudMove 30s linear infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes earthRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes earthFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                box-shadow: 
+                    0 0 60px rgba(59, 130, 246, 0.5),
+                    0 0 120px rgba(139, 92, 246, 0.3),
+                    0 0 180px rgba(251, 191, 36, 0.2),
+                    inset 0 0 60px rgba(0, 0, 0, 0.2),
+                    inset -25px -25px 50px rgba(0, 0, 0, 0.3),
+                    inset 25px 25px 50px rgba(255, 255, 255, 0.15);
+            }
+            50% { 
+                transform: translateY(-20px) scale(1.08);
+                box-shadow: 
+                    0 0 80px rgba(59, 130, 246, 0.7),
+                    0 0 160px rgba(139, 92, 246, 0.5),
+                    0 0 240px rgba(251, 191, 36, 0.3),
+                    inset 0 0 60px rgba(0, 0, 0, 0.1),
+                    inset -25px -25px 50px rgba(0, 0, 0, 0.2),
+                    inset 25px 25px 50px rgba(255, 255, 255, 0.25);
+            }
+        }
+        
+        @keyframes earthPulse {
+            0%, 100% { 
+                filter: brightness(1) saturate(1);
+            }
+            50% { 
+                filter: brightness(1.2) saturate(1.3);
+            }
+        }
+        
+        @keyframes continentMove1 {
+            from { transform: rotate(0deg) translateX(5px); }
+            to { transform: rotate(360deg) translateX(5px); }
+        }
+        
+        @keyframes continentMove2 {
+            from { transform: rotate(0deg) translateX(-3px); }
+            to { transform: rotate(360deg) translateX(-3px); }
+        }
+        
+        @keyframes continentMove3 {
+            from { transform: rotate(0deg) translateX(2px); }
+            to { transform: rotate(360deg) translateX(2px); }
+        }
+        
+        @keyframes continentMove4 {
+            from { transform: rotate(0deg) translateX(-2px); }
+            to { transform: rotate(360deg) translateX(-2px); }
+        }
+        
+        @keyframes atmosphereGlow {
+            0%, 100% { 
+                opacity: 0.7; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes atmosphereRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes cloudMove {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .earth-sparkle {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: sparkle 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0.3; 
+                transform: scale(0.8) rotate(0deg);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.3) rotate(180deg);
+            }
+        }
+        
+        .earth-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid;
+            pointer-events: none;
+        }
+        
+        .earth-ring-1 {
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            border-color: rgba(59, 130, 246, 0.3);
+            animation: ringRotate1 15s linear infinite;
+        }
+        
+        .earth-ring-2 {
+            top: -35px;
+            left: -35px;
+            width: calc(100% + 70px);
+            height: calc(100% + 70px);
+            border-color: rgba(139, 92, 246, 0.2);
+            animation: ringRotate2 20s linear infinite reverse;
+        }
+        
+        .earth-ring-3 {
+            top: -50px;
+            left: -50px;
+            width: calc(100% + 100px);
+            height: calc(100% + 100px);
+            border-color: rgba(251, 191, 36, 0.15);
+            animation: ringRotate3 25s linear infinite;
+        }
+        
+        @keyframes ringRotate1 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes ringRotate2 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes ringRotate3 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .music-note {
+            font-size: 2rem;
+            color: rgba(59, 130, 246, 0.6);
+            animation: musicFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes musicFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-30px) rotate(10deg); opacity: 1; }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* 3D Title Styles */
+        .title-3d {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .title-word {
+            display: inline-block;
+            margin: 0 0.2em;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #fbbf24, #06b6d4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 1px 0 rgba(255, 255, 255, 0.1),
+                0 2px 0 rgba(0, 0, 0, 0.3),
+                0 3px 0 rgba(0, 0, 0, 0.2),
+                0 4px 0 rgba(0, 0, 0, 0.1),
+                0 5px 10px rgba(0, 0, 0, 0.5),
+                0 10px 20px rgba(59, 130, 246, 0.3);
+            animation: 
+                titleFloat 4s ease-in-out infinite,
+                gradientShift 8s ease-in-out infinite,
+                titleGlow 3s ease-in-out infinite;
+            transform-origin: center;
+            transition: all 0.3s ease;
+        }
+        
+        .title-word:hover {
+            transform: translateY(-10px) rotateX(15deg) scale(1.1);
+            text-shadow: 
+                0 2px 0 rgba(255, 255, 255, 0.2),
+                0 4px 0 rgba(0, 0, 0, 0.4),
+                0 6px 0 rgba(0, 0, 0, 0.3),
+                0 8px 0 rgba(0, 0, 0, 0.2),
+                0 10px 20px rgba(0, 0, 0, 0.6),
+                0 20px 40px rgba(59, 130, 246, 0.5);
+        }
+        
+        @keyframes titleFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotateX(0deg); 
+            }
+            50% { 
+                transform: translateY(-15px) rotateX(5deg); 
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+            }
+            33% { 
+                filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.7));
+            }
+            66% { 
+                filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.6));
+            }
+        }
+        
+        .scroll-container {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(59, 130, 246, 0.5) transparent;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.5);
+            border-radius: 4px;
+        }
+        
+        /* Enhanced Star Animations */
+        .star-blue { background: #3b82f6; }
+        .star-violet { background: #8b5cf6; }
+        .star-gold { background: #fbbf24; }
+        .star-white { background: #ffffff; }
+        .star-cyan { background: #06b6d4; }
+        
+        @keyframes twinkleEnhanced {
+            0%, 100% { 
+                opacity: 0.2; 
+                transform: scale(0.8) rotate(0deg);
+                box-shadow: 0 0 2px currentColor;
+            }
+            25% { 
+                opacity: 0.8; 
+                transform: scale(1.2) rotate(90deg);
+                box-shadow: 0 0 8px currentColor;
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.5) rotate(180deg);
+                box-shadow: 0 0 12px currentColor;
+            }
+            75% { 
+                opacity: 0.6; 
+                transform: scale(1.1) rotate(270deg);
+                box-shadow: 0 0 6px currentColor;
+            }
+        }
+        
+        /* Right Side Animated Elements */
+        .floating-elements {
+            position: absolute;
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 300px;
+            pointer-events: none;
+        }
+        
+        .vinyl-record {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #1f2937, #111827);
+            border-radius: 50%;
+            position: relative;
+            animation: spin 8s linear infinite;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .vinyl-record::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #374151;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .vinyl-record::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: #6b7280;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .sound-wave {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to top, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+        
+        .sound-wave:nth-child(1) { left: 0; height: 20px; animation-delay: 0s; }
+        .sound-wave:nth-child(2) { left: 8px; height: 35px; animation-delay: 0.1s; }
+        .sound-wave:nth-child(3) { left: 16px; height: 50px; animation-delay: 0.2s; }
+        .sound-wave:nth-child(4) { left: 24px; height: 30px; animation-delay: 0.3s; }
+        .sound-wave:nth-child(5) { left: 32px; height: 45px; animation-delay: 0.4s; }
+        .sound-wave:nth-child(6) { left: 40px; height: 25px; animation-delay: 0.5s; }
+        
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.3); opacity: 0.7; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+        
+        .floating-note {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatNote 4s ease-in-out infinite;
+        }
+        
+        .floating-note:nth-child(1) { 
+            top: 20px; 
+            left: 20px; 
+            color: #3b82f6; 
+            animation-delay: 0s; 
+        }
+        .floating-note:nth-child(2) { 
+            top: 80px; 
+            right: 30px; 
+            color: #8b5cf6; 
+            animation-delay: 1s; 
+        }
+        .floating-note:nth-child(3) { 
+            bottom: 60px; 
+            left: 40px; 
+            color: #fbbf24; 
+            animation-delay: 2s; 
+        }
+        .floating-note:nth-child(4) { 
+            bottom: 20px; 
+            right: 10px; 
+            color: #06b6d4; 
+            animation-delay: 3s; 
+        }
+        
+        @keyframes floatNote {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1); 
+                opacity: 0.6; 
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg) scale(1.2); 
+                opacity: 1; 
+            }
+        }
+        
+        /* Enhanced Input Container Styles */
+        .input-container-enhanced {
+            position: relative;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .input-bg-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.2), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.18), transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.12), transparent 60%),
+                linear-gradient(135deg, rgba(15, 15, 35, 0.95), rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.95));
+            border-radius: 2rem;
+            animation: gradientShift 12s ease-in-out infinite;
+            backdrop-filter: blur(25px);
+            border: 3px solid rgba(139, 92, 246, 0.4);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.5),
+                0 20px 40px rgba(139, 92, 246, 0.3),
+                0 0 50px rgba(59, 130, 246, 0.2),
+                inset 0 3px 6px rgba(255, 255, 255, 0.12),
+                inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .input-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .input-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            animation: particleFloat 8s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(0.8);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translateY(-30px) scale(1.2);
+                opacity: 1;
+            }
+        }
+        
+        .input-main-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .input-label-container {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .input-label {
+            display: block;
+            cursor: pointer;
+        }
+        
+        .input-label-text {
+            display: block;
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', monospace;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            animation: labelGlow 3s ease-in-out infinite;
+        }
+        
+        .input-label-subtitle {
+            display: block;
+            font-size: 1rem;
+            color: rgba(139, 92, 246, 0.8);
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        @keyframes labelGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+            }
+            50% { 
+                filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.8));
+            }
+        }
+        
+        .textarea-container {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .textarea-border-glow {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #fbbf24, #06b6d4);
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: borderRotate 4s linear infinite;
+        }
+        
+        .textarea-container:focus-within .textarea-border-glow {
+            opacity: 0.6;
+        }
+        
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .enhanced-textarea {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(145deg, rgba(15, 15, 35, 0.95), rgba(26, 26, 46, 0.9));
+            border: 3px solid rgba(139, 92, 246, 0.5);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            color: white;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            resize: none;
+            outline: none;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(15px);
+            box-shadow: 
+                inset 0 6px 12px rgba(0, 0, 0, 0.4),
+                inset 0 -3px 6px rgba(255, 255, 255, 0.08),
+                0 8px 16px rgba(139, 92, 246, 0.2),
+                0 0 30px rgba(59, 130, 246, 0.1);
+            position: relative;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+        
+        .enhanced-textarea::placeholder {
+            color: rgba(139, 92, 246, 0.7);
+            font-style: italic;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .enhanced-textarea:focus {
+            border-color: rgba(139, 92, 246, 0.9);
+            box-shadow: 
+                inset 0 6px 12px rgba(0, 0, 0, 0.5),
+                inset 0 -3px 6px rgba(255, 255, 255, 0.12),
+                0 12px 24px rgba(139, 92, 246, 0.4),
+                0 0 40px rgba(139, 92, 246, 0.5),
+                0 0 60px rgba(59, 130, 246, 0.3);
+            transform: translateY(-3px) scale(1.01);
+            background: linear-gradient(145deg, rgba(15, 15, 35, 0.98), rgba(26, 26, 46, 0.95));
+        }
+        
+        .character-counter {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 1rem;
+            font-size: 0.875rem;
+            color: rgba(139, 92, 246, 0.7);
+            font-family: 'Orbitron', monospace;
+            z-index: 3;
+        }
+        
+        .input-sparkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .sparkle {
+            position: absolute;
+            font-size: 1rem;
+            animation: sparkleEnhanced 4s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkleEnhanced {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0.5) rotate(0deg);
+            }
+            25% { 
+                opacity: 0.8; 
+                transform: scale(1.2) rotate(90deg);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.5) rotate(180deg);
+            }
+            75% { 
+                opacity: 0.6; 
+                transform: scale(1.1) rotate(270deg);
+            }
+        }
+        
+        /* Enhanced textarea focus effects */
+        .enhanced-textarea:focus + .character-counter {
+            color: rgba(251, 191, 36, 0.9);
+        }
+        
+        .enhanced-textarea:focus ~ .input-sparkles .sparkle {
+            animation-duration: 2s;
+        }
+        
+        /* Page Navigation Styles */
+        .page-container {
+            min-height: 100vh;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .page-container.hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            pointer-events: none;
+        }
+        
+        /* Enhanced Enter Button */
+        .enter-button {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% 200%;
+            box-shadow: 
+                0 20px 40px rgba(59, 130, 246, 0.3),
+                0 10px 20px rgba(139, 92, 246, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(139, 92, 246, 0.4);
+        }
+        
+        .enter-button:hover {
+            box-shadow: 
+                0 30px 60px rgba(59, 130, 246, 0.4),
+                0 15px 30px rgba(139, 92, 246, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            border-color: rgba(139, 92, 246, 0.6);
+        }
+        
+        @keyframes gradient-x {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .animate-gradient-x {
+            animation: gradient-x 3s ease infinite;
+        }
+        
+        .bg-size-200 {
+            background-size: 200% 200%;
+        }
+        
+        /* Navigation Styles */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: rgba(139, 92, 246, 0.8);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+        }
+        
+        .nav-link:hover {
+            color: rgba(139, 92, 246, 1);
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Page Transition Effects */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        /* Cursor Sound Effects */
+        .sound-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sound-element:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Suggestion Chips */
+        .suggestion-chip {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(59, 130, 246, 0.6));
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.2),
+                0 2px 4px rgba(139, 92, 246, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .suggestion-chip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .suggestion-chip:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(59, 130, 246, 0.7));
+            border-color: rgba(139, 92, 246, 0.6);
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(139, 92, 246, 0.4),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2),
+                0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        
+        .suggestion-chip:hover::before {
+            left: 100%;
+        }
+        
+        .suggestion-chip:active {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 
+                0 4px 8px rgba(0, 0, 0, 0.2),
+                0 2px 4px rgba(139, 92, 246, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Particle Effects */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #3b82f6;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle 3s linear infinite;
+        }
+        
+        @keyframes particle {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen relative">
+    <!-- Animated Stars Background -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Page 1: Welcome Page -->
+    <div id="page1" class="page-container">
+        <section class="relative z-10 min-h-screen flex items-center justify-center px-4">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Floating Earth -->
+                <div class="floating earth mx-auto mb-12 glow-blue">
+                    <div class="earth-atmosphere"></div>
+                    <div class="earth-clouds"></div>
+                    <div class="earth-continent-3"></div>
+                    <div class="earth-continent-4"></div>
+                    
+                    <!-- Sparkle Effects -->
+                    <div class="earth-sparkle" style="top: 15%; left: 20%; animation-delay: 0s;">✨</div>
+                    <div class="earth-sparkle" style="top: 30%; right: 25%; animation-delay: 1s;">⭐</div>
+                    <div class="earth-sparkle" style="bottom: 35%; left: 30%; animation-delay: 2s;">💫</div>
+                    <div class="earth-sparkle" style="bottom: 20%; right: 20%; animation-delay: 3s;">✨</div>
+                    <div class="earth-sparkle" style="top: 50%; left: 10%; animation-delay: 4s;">🌟</div>
+                    <div class="earth-sparkle" style="top: 60%; right: 15%; animation-delay: 5s;">⭐</div>
+                    
+                    <!-- Orbital Rings -->
+                    <div class="earth-ring earth-ring-1"></div>
+                    <div class="earth-ring earth-ring-2"></div>
+                    <div class="earth-ring earth-ring-3"></div>
+                </div>
+                
+                <!-- Musical Notes -->
+                <div class="absolute top-20 left-1/4 music-note">♪</div>
+                <div class="absolute top-32 right-1/3 music-note" style="animation-delay: 1s;">♫</div>
+                <div class="absolute bottom-40 left-1/3 music-note" style="animation-delay: 2s;">♪</div>
+                
+                <h1 class="orbitron text-6xl md:text-8xl font-bold mb-8 title-3d">
+                    <span class="title-word" style="animation-delay: 0s;">The</span>
+                    <span class="title-word" style="animation-delay: 0.2s;">Song</span>
+                    <span class="title-word" style="animation-delay: 0.4s;">of</span>
+                    <span class="title-word" style="animation-delay: 0.6s;">Humanity</span>
+                </h1>
+                <p class="text-2xl md:text-3xl text-blue-200 mb-16 italic font-light">
+                    Where Emotions Become Songs
+                </p>
+                
+                <!-- Beautiful Enter Button -->
+                <button 
+                    onclick="enterExperience()"
+                    class="enter-button group relative overflow-hidden px-12 py-6 rounded-2xl font-bold text-xl orbitron sound-element transform transition-all duration-500 hover:scale-105"
+                >
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-size-200 animate-gradient-x"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    <span class="relative z-10 flex items-center space-x-3">
+                        <span>Begin Your Journey</span>
+                        <span class="text-2xl group-hover:translate-x-2 transition-transform duration-300">✨</span>
+                    </span>
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                </button>
+                
+                <!-- Floating Invitation Text -->
+                <p class="text-lg text-gray-300 mt-8 opacity-80 animate-pulse">
+                    Click to share your heart with the world
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Page 2: Main Experience -->
+    <div id="page2" class="page-container hidden">
+        <!-- Navigation Header -->
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-700/50">
+            <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+                <button 
+                    onclick="goToPage1()"
+                    class="flex items-center space-x-2 text-blue-300 hover:text-blue-200 transition-colors sound-element"
+                >
+                    <span class="text-xl">←</span>
+                    <span class="orbitron font-semibold">The Song of Humanity</span>
+                </button>
+                <div class="flex space-x-6">
+                    <a href="#share-section" class="nav-link sound-element">Share</a>
+                    <a href="#voices-section" class="nav-link sound-element">Voices</a>
+                    <a href="#mission-section" class="nav-link sound-element">Mission</a>
+                </div>
+            </div>
+        </nav>
+        <!-- Emotion Input Section -->
+        <section id="share-section" class="relative z-10 py-24 px-4 mt-16">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="orbitron text-5xl md:text-7xl font-bold mb-8 title-3d">
+                    <span class="title-word" style="animation-delay: 0s;">Share</span>
+                    <span class="title-word" style="animation-delay: 0.2s;">Your</span>
+                    <span class="title-word" style="animation-delay: 0.4s;">Heart</span>
+                </h2>
+                <p class="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
+                    Pour your emotions, stories, and dreams into words. Watch as they transform into something beautiful.
+                </p>
+            
+            <div class="input-container-enhanced relative">
+                <!-- Animated Background Gradient -->
+                <div class="input-bg-gradient"></div>
+                
+                <!-- Floating Particles -->
+                <div class="input-particles">
+                    <div class="input-particle" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
+                    <div class="input-particle" style="top: 20%; right: 20%; animation-delay: 1s;"></div>
+                    <div class="input-particle" style="bottom: 30%; left: 25%; animation-delay: 2s;"></div>
+                    <div class="input-particle" style="bottom: 15%; right: 15%; animation-delay: 3s;"></div>
+                    <div class="input-particle" style="top: 50%; left: 5%; animation-delay: 4s;"></div>
+                    <div class="input-particle" style="top: 70%; right: 10%; animation-delay: 5s;"></div>
+                </div>
+                
+                <!-- Main Input Container -->
+                <div class="input-main-container">
+                    <!-- Right Side Floating Elements -->
+                    <div class="floating-elements">
+                        <!-- Spinning Vinyl Record -->
+                        <div class="vinyl-record absolute top-0"></div>
+                        
+                        <!-- Sound Wave Visualizer -->
+                        <div class="absolute top-24 left-4">
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                        </div>
+                        
+                        <!-- Floating Musical Notes -->
+                        <div class="floating-note">♪</div>
+                        <div class="floating-note">♫</div>
+                        <div class="floating-note">♪</div>
+                        <div class="floating-note">♬</div>
+                    </div>
+                    
+                    <!-- Enhanced Input Label -->
+                    <div class="input-label-container">
+                        <label class="input-label">
+                            <span class="input-label-subtitle">Transform your emotions into beautiful melodies</span>
+                        </label>
+                    </div>
+                    
+                    <!-- Enhanced Textarea Container -->
+                    <div class="textarea-container">
+                        <div class="textarea-border-glow"></div>
+                        <textarea 
+                            id="emotionInput"
+                            placeholder="Start typing your feelings, thoughts, or story here... Share what's in your heart and watch it transform into something beautiful."
+                            class="enhanced-textarea sound-element"
+                            style="padding-right: 80px;"
+                        ></textarea>
+                        
+                        <!-- Microphone Button - Attached to Input -->
+                        <div class="absolute top-4 right-4 z-10">
+                            <button 
+                                id="micButton"
+                                onclick="toggleVoiceInput()"
+                                class="mic-3d mic-pulse flex items-center justify-center text-white font-bold text-lg sound-element relative"
+                                title="Click to speak your emotions"
+                                style="width: 50px; height: 50px;"
+                            >
+                                🎤
+                                <div id="micPing" class="absolute -inset-1 bg-blue-400 rounded-full opacity-0 animate-ping"></div>
+                            </button>
+                        </div>
+                        
+                        <!-- Character Counter -->
+                        <div class="character-counter">
+                            <span id="charCount">0</span> characters
+                        </div>
+                        
+                        <!-- Input Enhancement Effects -->
+                        <div class="input-sparkles">
+                            <div class="sparkle" style="top: 20%; left: 10%; animation-delay: 0s;">✨</div>
+                            <div class="sparkle" style="top: 60%; right: 15%; animation-delay: 1.5s;">⭐</div>
+                            <div class="sparkle" style="bottom: 25%; left: 20%; animation-delay: 3s;">💫</div>
+                            <div class="sparkle" style="top: 40%; right: 25%; animation-delay: 4.5s;">✨</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Suggestion Chips -->
+                    <div class="mt-6">
+                        <div class="text-center mb-4">
+                            <span class="text-sm text-purple-300 font-medium">✨ Need inspiration? Try these:</span>
+                        </div>
+                        <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+                            <button onclick="fillSuggestion('I feel hopeful despite all the struggles in my life right now')" class="suggestion-chip">
+                                Hopeful struggles
+                            </button>
+                            <button onclick="fillSuggestion('There are moments from my childhood that still make me smile')" class="suggestion-chip">
+                                Nostalgic moments
+                            </button>
+                            <button onclick="fillSuggestion('Love is the only thing that makes sense in this chaotic world')" class="suggestion-chip">
+                                Pure love
+                            </button>
+                            <button onclick="fillSuggestion('Sometimes I think too deeply about life and it overwhelms me')" class="suggestion-chip">
+                                Deep thoughts
+                            </button>
+                            <button onclick="fillSuggestion('I miss the person I used to be before everything changed')" class="suggestion-chip">
+                                Missing myself
+                            </button>
+                            <button onclick="fillSuggestion('Every ordinary day has something magical if you look closely')" class="suggestion-chip">
+                                Daily magic
+                            </button>
+                            <button onclick="fillSuggestion('There are stories inside me that no one else will ever know')" class="suggestion-chip">
+                                Hidden stories
+                            </button>
+                            <button onclick="fillSuggestion('I want to feel free from all the emotions that weigh me down')" class="suggestion-chip">
+                                Emotional freedom
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-center space-y-6 mt-8">
+                    <!-- Voice Status -->
+                    <div id="voiceStatus" class="text-sm text-blue-300 h-5 font-medium"></div>
+                    
+                    <!-- Main Generate Button -->
+                    <button 
+                        onclick="generateSong()"
+                        class="btn-3d btn-3d-violet px-10 py-5 rounded-xl font-semibold text-xl orbitron sound-element transform hover:scale-105 transition-all duration-300"
+                    >
+                        <span class="flex items-center space-x-3">
+                            <span>Turn into Song</span>
+                            <span class="text-2xl">✨</span>
+                        </span>
+                    </button>
+                    
+                    <!-- Voice Response Toggle - Below Button -->
+                    <div class="flex flex-col items-center space-y-3 mt-6">
+                        <div class="flex items-center space-x-3">
+                            <label class="relative cursor-pointer">
+                                <input 
+                                    type="checkbox" 
+                                    id="speakToggle"
+                                    class="sr-only"
+                                    onchange="toggleSpeakResponse()"
+                                >
+                                <div class="toggle-3d">
+                                    <div class="toggle-dot-3d"></div>
+                                </div>
+                            </label>
+                            <div class="flex flex-col">
+                                <span class="text-sm text-gray-300 font-medium">🎤 AI Voice Narrator</span>
+                                <span class="text-xs text-gray-500">Musical Voice Response</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-400 text-center max-w-xs">
+                            Turn ON to hear your generated song narrated by our AI voice with beautiful musical background
+                        </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Generated Song Display -->
+        <section class="relative z-10 py-20 px-4" id="songSection" style="display: none;">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="orbitron text-4xl md:text-5xl font-bold mb-12 text-center text-gold-300">
+                    Your Song
+                </h2>
+                <div class="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-2xl p-8 glow-gold card-hover">
+                    <div id="generatedSong" class="text-lg leading-relaxed italic text-center">
+                        <!-- Generated content will appear here -->
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <button onclick="shareSong()" class="btn-3d btn-3d-gold px-6 py-3 rounded-lg font-semibold sound-element">
+                            Share Your Song 🌟
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stories Carousel -->
+        <section id="voices-section" class="relative z-10 py-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="orbitron text-4xl md:text-5xl font-bold mb-6 text-center text-blue-300">
+                    Voices from Around the World
+                </h2>
+                <p class="text-lg text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+                    Real stories from people who shared their hearts and transformed them into beautiful songs. 
+                    Each voice adds a unique note to humanity's symphony.
+                </p>
+                <div class="overflow-x-auto scroll-container">
+                    <div class="flex space-x-6 pb-4" style="width: max-content;">
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 w-80 glow-blue card-hover">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">🌅</span>
+                                <span class="text-sm text-blue-300 font-semibold">Dawn Reflection</span>
+                            </div>
+                            <p class="italic text-gray-200 mb-4">"In the silence of dawn, I found my voice and realized that every sunrise brings new hope to heal old wounds..."</p>
+                            <div class="text-sm text-blue-300">— Maria, São Paulo</div>
+                        </div>
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 w-80 glow-violet card-hover">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">💝</span>
+                                <span class="text-sm text-violet-300 font-semibold">Universal Love</span>
+                            </div>
+                            <p class="italic text-gray-200 mb-4">"Love transcends all languages, all borders. It's the one song that every heart knows how to sing..."</p>
+                            <div class="text-sm text-violet-300">— Ahmed, Cairo</div>
+                        </div>
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 w-80 glow-gold card-hover">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">🌟</span>
+                                <span class="text-sm text-yellow-300 font-semibold">Eternal Hope</span>
+                            </div>
+                            <p class="italic text-gray-200 mb-4">"Hope is the melody that never fades, even in the darkest moments it whispers: tomorrow will be different..."</p>
+                            <div class="text-sm text-yellow-300">— Yuki, Tokyo</div>
+                        </div>
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 w-80 glow-blue card-hover">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">💧</span>
+                                <span class="text-sm text-blue-300 font-semibold">Emotional Depth</span>
+                            </div>
+                            <p class="italic text-gray-200 mb-4">"Every tear carries the weight of a story untold, and when we share them, they become rivers of connection..."</p>
+                            <div class="text-sm text-blue-300">— Elena, Moscow</div>
+                        </div>
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 w-80 glow-violet card-hover">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">🤝</span>
+                                <span class="text-sm text-violet-300 font-semibold">Unity Song</span>
+                            </div>
+                            <p class="italic text-gray-200 mb-4">"In unity, we find our strongest song. When voices join together, they create harmonies that heal the world..."</p>
+                            <div class="text-sm text-violet-300">— James, New York</div>
+                        </div>
+                        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 w-80 glow-gold card-hover">
+                            <div class="flex items-center mb-3">
+                                <span class="text-2xl mr-3">🌸</span>
+                                <span class="text-sm text-yellow-300 font-semibold">Inner Peace</span>
+                            </div>
+                            <p class="italic text-gray-200 mb-4">"Sometimes the most beautiful songs come from the quietest moments when we finally listen to our own hearts..."</p>
+                            <div class="text-sm text-yellow-300">— Priya, Mumbai</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="mission-section" class="relative z-10 py-20 px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="orbitron text-4xl md:text-5xl font-bold mb-8 gradient-text">
+                    Our Mission
+                </h2>
+                <div class="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 glow-blue">
+                    <p class="text-xl text-gray-200 leading-relaxed mb-6">
+                        We believe that every human emotion is a note in the grand symphony of existence. 
+                        Through the power of AI and music, we're creating a space where hearts connect, 
+                        stories intertwine, and the universal language of feeling brings us together.
+                    </p>
+                    <p class="text-lg text-blue-200 italic">
+                        "Unifying human voices through AI and music"
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="relative z-10 py-12 px-4 border-t border-gray-700/50">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="text-lg italic text-gray-300 mb-6">
+                    "In every voice, there is a song waiting to be heard. In every song, there is a soul waiting to be understood."
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <p class="text-gray-400">© 2024 The Song of Humanity</p>
+                    <button onclick="openContact()" class="btn-3d px-6 py-2 rounded-lg font-semibold sound-element">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    
+    <script>
+        // Create animated stars with enhanced twinkling
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 150;
+            const starColors = ['star-blue', 'star-violet', 'star-gold', 'star-white', 'star-cyan'];
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                const colorClass = starColors[Math.floor(Math.random() * starColors.length)];
+                star.className = `star ${colorClass}`;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 4 + 2 + 'px';
+                star.style.height = star.style.width;
+                star.style.animation = `twinkleEnhanced ${3 + Math.random() * 4}s infinite`;
+                star.style.animationDelay = Math.random() * 5 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Voice recognition variables
+        let recognition;
+        let isListening = false;
+        let speakResponseEnabled = false;
+        
+        // Initialize speech recognition
+        function initSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+                
+                recognition.onstart = function() {
+                    isListening = true;
+                    updateMicButton();
+                    updateVoiceStatus('Listening... Speak now');
+                };
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById('emotionInput').value = transcript;
+                    updateVoiceStatus('Voice captured successfully!');
+                    setTimeout(() => updateVoiceStatus(''), 2000);
+                };
+                
+                recognition.onerror = function(event) {
+                    updateVoiceStatus('Voice recognition error. Please try again.');
+                    setTimeout(() => updateVoiceStatus(''), 3000);
+                };
+                
+                recognition.onend = function() {
+                    isListening = false;
+                    updateMicButton();
+                };
+            }
+        }
+        
+        // Toggle voice input
+        function toggleVoiceInput() {
+            if (!recognition) {
+                updateVoiceStatus('Voice recognition not supported in this browser');
+                setTimeout(() => updateVoiceStatus(''), 3000);
+                return;
+            }
+            
+            if (isListening) {
+                recognition.stop();
+                updateVoiceStatus('Stopped listening');
+                setTimeout(() => updateVoiceStatus(''), 2000);
+            } else {
+                recognition.start();
+            }
+        }
+        
+        // Update microphone button appearance
+        function updateMicButton() {
+            const micButton = document.getElementById('micButton');
+            const micPing = document.getElementById('micPing');
+            
+            if (isListening) {
+                micButton.classList.remove('mic-pulse');
+                micButton.classList.add('recording');
+                micPing.style.opacity = '1';
+            } else {
+                micButton.classList.remove('recording');
+                micButton.classList.add('mic-pulse');
+                micPing.style.opacity = '0';
+            }
+        }
+        
+        // Update voice status text
+        function updateVoiceStatus(message) {
+            document.getElementById('voiceStatus').textContent = message;
+        }
+        
+        // Toggle speak response
+        function toggleSpeakResponse() {
+            const toggle = document.getElementById('speakToggle');
+            const toggleBg = toggle.parentElement.querySelector('.toggle-3d');
+            
+            speakResponseEnabled = toggle.checked;
+            
+            if (speakResponseEnabled) {
+                toggleBg.classList.add('active');
+            } else {
+                toggleBg.classList.remove('active');
+            }
+        }
+        
+        // Enhanced musical voice synthesis
+        function speakText(text) {
+            if (!speakResponseEnabled || !('speechSynthesis' in window)) return;
+            
+            // Cancel any ongoing speech
+            speechSynthesis.cancel();
+            
+            // Clean text for speech (remove emojis and special characters)
+            const cleanText = text.replace(/[🎵🎶✨]/g, '').replace(/\n/g, ' ');
+            
+            // Split text into musical phrases for better rhythm
+            const phrases = cleanText.split(/[.!?]/).filter(phrase => phrase.trim());
+            
+            // Play background musical ambience
+            playBackgroundMelody();
+            
+            // Speak each phrase with musical timing
+            phrases.forEach((phrase, index) => {
+                setTimeout(() => {
+                    speakMusicalPhrase(phrase.trim(), index);
+                }, index * 3000); // 3 second delay between phrases
+            });
+        }
+        
+        function speakMusicalPhrase(text, phraseIndex) {
+            if (!text) return;
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Enhanced musical voice settings
+            utterance.rate = 0.7; // Slower, more melodic pace
+            utterance.pitch = 1.3; // Higher, sweeter pitch
+            utterance.volume = 0.9;
+            
+            // Find the most musical voice available
+            const voices = speechSynthesis.getVoices();
+            const preferredVoice = voices.find(voice => 
+                voice.name.includes('Samantha') || // macOS sweet voice
+                voice.name.includes('Karen') ||     // Windows sweet voice
+                voice.name.includes('Fiona') ||     // Another sweet option
+                voice.name.includes('Google UK English Female') ||
+                voice.name.includes('Microsoft Zira') ||
+                (voice.lang.includes('en') && voice.name.toLowerCase().includes('female'))
+            ) || voices.find(voice => voice.lang.includes('en'));
+            
+            if (preferredVoice) utterance.voice = preferredVoice;
+            
+            // Add musical emphasis to different phrases
+            if (phraseIndex === 0) {
+                utterance.pitch = 1.4; // Higher for opening
+                utterance.rate = 0.6;  // Slower for dramatic effect
+            } else if (phraseIndex % 2 === 1) {
+                utterance.pitch = 1.2; // Vary pitch for musicality
+            }
+            
+            // Play a gentle chime before each phrase
+            setTimeout(() => {
+                playMusicalChime(phraseIndex);
+            }, 200);
+            
+            // Add reverb-like effect by speaking twice with slight delay
+            utterance.onstart = () => {
+                // Create echo effect
+                setTimeout(() => {
+                    const echoUtterance = new SpeechSynthesisUtterance(text);
+                    echoUtterance.rate = utterance.rate;
+                    echoUtterance.pitch = utterance.pitch - 0.1;
+                    echoUtterance.volume = 0.3; // Much quieter for echo
+                    if (preferredVoice) echoUtterance.voice = preferredVoice;
+                    speechSynthesis.speak(echoUtterance);
+                }, 100);
+            };
+            
+            speechSynthesis.speak(utterance);
+        }
+        
+        function playBackgroundMelody() {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            // Create a gentle, ambient melody
+            const melodyNotes = [
+                { freq: 523.25, time: 0, duration: 2 },    // C5
+                { freq: 659.25, time: 2, duration: 2 },    // E5
+                { freq: 783.99, time: 4, duration: 2 },    // G5
+                { freq: 659.25, time: 6, duration: 2 },    // E5
+                { freq: 523.25, time: 8, duration: 3 },    // C5
+            ];
+            
+            melodyNotes.forEach(note => {
+                setTimeout(() => {
+                    playMelodyNote(note.freq, note.duration * 1000, 0.08);
+                }, note.time * 1000);
+            });
+            
+            // Add gentle harmony
+            setTimeout(() => {
+                playHarmonyChord([261.63, 329.63, 392.00], 8000, 0.05); // C major chord
+            }, 1000);
+        }
+        
+        function playMelodyNote(frequency, duration, volume = 0.1) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            const filter = audioContext.createBiquadFilter();
+            
+            // Create a warm, bell-like tone
+            oscillator.type = 'triangle';
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            
+            // Add gentle vibrato
+            const vibrato = audioContext.createOscillator();
+            const vibratoGain = audioContext.createGain();
+            vibrato.frequency.setValueAtTime(5, audioContext.currentTime); // 5Hz vibrato
+            vibratoGain.gain.setValueAtTime(10, audioContext.currentTime); // Subtle vibrato depth
+            
+            vibrato.connect(vibratoGain);
+            vibratoGain.connect(oscillator.frequency);
+            
+            // Add low-pass filter for warmth
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(2000, audioContext.currentTime);
+            filter.Q.setValueAtTime(1, audioContext.currentTime);
+            
+            oscillator.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Smooth envelope
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.1);
+            gainNode.gain.linearRampToValueAtTime(volume * 0.7, audioContext.currentTime + duration/1000 - 0.2);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration/1000);
+            
+            oscillator.start(audioContext.currentTime);
+            vibrato.start(audioContext.currentTime);
+            
+            oscillator.stop(audioContext.currentTime + duration/1000);
+            vibrato.stop(audioContext.currentTime + duration/1000);
+        }
+        
+        function playHarmonyChord(frequencies, duration, volume = 0.05) {
+            frequencies.forEach((freq, index) => {
+                setTimeout(() => {
+                    playMelodyNote(freq, duration - (index * 100), volume);
+                }, index * 50);
+            });
+        }
+        
+        function playMusicalChime(phraseIndex) {
+            // Different chimes for different phrases
+            const chimeFrequencies = [
+                [523.25, 659.25, 783.99], // C major
+                [587.33, 739.99, 880.00], // D major  
+                [659.25, 830.61, 987.77], // E major
+                [698.46, 880.00, 1046.50] // F major
+            ];
+            
+            const chime = chimeFrequencies[phraseIndex % chimeFrequencies.length];
+            
+            chime.forEach((freq, index) => {
+                setTimeout(() => {
+                    playMelodyNote(freq, 800, 0.06);
+                }, index * 100);
+            });
+        }
+        
+        // Generate song function
+        function generateSong() {
+            const input = document.getElementById('emotionInput').value.trim();
+            if (!input) {
+                alert('Please share your emotion or story first...');
+                return;
+            }
+            
+            const songSection = document.getElementById('songSection');
+            const generatedSong = document.getElementById('generatedSong');
+            
+            // Simulate AI generation with poetic response
+            const responses = [
+                `🎵 In the depths of "${input.substring(0, 20)}..." 🎵\n\nVerse 1:\nYour words dance like whispers in the wind\nCarrying stories that time cannot rescind\nEvery syllable a note in life's grand song\nWhere hearts and souls forever belong\n\nChorus:\nSing it loud, sing it true\nThis melody lives inside of you\nFrom your heart to the world above\nThis is your song of hope and love`,
+                
+                `🎶 From your heart: "${input.substring(0, 20)}..." 🎶\n\nVerse 1:\nIn the silence between heartbeats\nYour story finds its rhythm\nEach word a stepping stone\nAcross the river of human connection\n\nChorus:\nWe are the music makers\nWe are the dreamers of dreams\nYour voice joins the eternal chorus\nOf humanity's hopes and schemes`,
+                
+                `✨ Your emotion becomes music: "${input.substring(0, 20)}..." ✨\n\nVerse 1:\nLike morning light breaking through darkness\nYour feelings illuminate the path\nEvery emotion a color in the spectrum\nOf the human experience we share\n\nChorus:\nThis is your moment, this is your song\nLet it echo where you belong\nIn the symphony of souls\nWhere every story makes us whole`
+            ];
+            
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            
+            // Show the song section with animation
+            songSection.style.display = 'block';
+            generatedSong.innerHTML = randomResponse.replace(/\n/g, '<br>');
+            
+            // Speak the response if enabled
+            if (speakResponseEnabled) {
+                setTimeout(() => speakText(randomResponse), 500);
+            }
+            
+            // Smooth scroll to the song
+            songSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Share song function
+        function shareSong() {
+            alert('Your beautiful song has been shared with the world! 🌟\n\nIt will inspire others to find their own voice and add their melody to the Song of Humanity.');
+        }
+        
+        // Contact function
+        function openContact() {
+            alert('Contact Us:\n\n📧 Email: hello@songofhumanity.com\n🌐 Website: www.songofhumanity.com\n\nWe\'d love to hear your story and how music has touched your life.');
+        }
+        
+        // Sound System
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playHoverSound(frequency = 800, duration = 100) {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            // Create a more musical, bell-like sound
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.type = 'triangle'; // Changed from 'sine' to 'triangle' for warmer tone
+            
+            // Add a gentle frequency sweep for musical effect
+            oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.2, audioContext.currentTime + duration / 2000);
+            oscillator.frequency.exponentialRampToValueAtTime(frequency * 0.9, audioContext.currentTime + duration / 1000);
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.01); // Reduced volume
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration / 1000);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration / 1000);
+        }
+        
+        function playClickSound() {
+            // Create a pleasant chord-like click sound
+            playChordSound([800, 1000, 1200], 120);
+        }
+        
+        function playButtonSound() {
+            // Create a warm button press sound
+            playChordSound([400, 500, 600], 180);
+        }
+        
+        function playChordSound(frequencies, duration) {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            frequencies.forEach((freq, index) => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+                oscillator.type = 'triangle';
+                
+                // Stagger the chord notes slightly
+                const startTime = audioContext.currentTime + (index * 0.02);
+                const volume = 0.03 / frequencies.length; // Distribute volume across notes
+                
+                gainNode.gain.setValueAtTime(0, startTime);
+                gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration / 1000);
+                
+                oscillator.start(startTime);
+                oscillator.stop(startTime + duration / 1000);
+            });
+        }
+        
+        // Character counter functionality
+        function updateCharacterCounter() {
+            const textarea = document.getElementById('emotionInput');
+            const charCount = document.getElementById('charCount');
+            
+            if (textarea && charCount) {
+                textarea.addEventListener('input', function() {
+                    const count = this.value.length;
+                    charCount.textContent = count;
+                    
+                    // Change color based on length
+                    if (count > 500) {
+                        charCount.style.color = 'rgba(251, 191, 36, 0.9)';
+                    } else if (count > 200) {
+                        charCount.style.color = 'rgba(139, 92, 246, 0.9)';
+                    } else {
+                        charCount.style.color = 'rgba(139, 92, 246, 0.7)';
+                    }
+                });
+            }
+        }
+        
+        // Add sound effects to elements
+        function addSoundEffects() {
+            const soundElements = document.querySelectorAll('.sound-element');
+            const musicalNotes = [523, 587, 659, 698, 784, 880, 988]; // C, D, E, F, G, A, B
+            
+            soundElements.forEach((element, index) => {
+                element.addEventListener('mouseenter', () => {
+                    // Play different musical notes for variety
+                    const note = musicalNotes[index % musicalNotes.length];
+                    playHoverSound(note, 120);
+                    createParticles(element);
+                });
+                
+                element.addEventListener('click', () => {
+                    playClickSound();
+                });
+            });
+            
+            // Add sound to cards with pentatonic scale (more pleasant)
+            const pentatonicNotes = [523, 587, 659, 784, 880]; // C, D, E, G, A
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach((card, index) => {
+                card.addEventListener('mouseenter', () => {
+                    const note = pentatonicNotes[index % pentatonicNotes.length];
+                    playHoverSound(note, 150);
+                });
+            });
+            
+            // Add gentle background cursor movement sounds
+            let lastSoundTime = 0;
+            document.addEventListener('mousemove', (e) => {
+                const now = Date.now();
+                // Only play sound every 200ms to avoid overwhelming
+                if (now - lastSoundTime > 200) {
+                    // Create very subtle ambient sounds based on cursor position
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    
+                    // Map cursor position to musical frequency (200-800 Hz range)
+                    const frequency = 200 + (x * 600);
+                    const volume = 0.01; // Very quiet ambient sound
+                    
+                    if (audioContext.state !== 'suspended') {
+                        playAmbientSound(frequency, 50, volume);
+                    }
+                    lastSoundTime = now;
+                }
+            });
+        }
+        
+        function playAmbientSound(frequency, duration, volume = 0.01) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+            oscillator.type = 'sine'; // Soft sine wave for ambient sound
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration / 1000);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration / 1000);
+        }
+        
+        // Create particle effects
+        function createParticles(element) {
+            const rect = element.getBoundingClientRect();
+            const particleCount = 5;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = (rect.left + rect.width / 2) + 'px';
+                particle.style.top = (rect.top + rect.height / 2) + 'px';
+                particle.style.background = ['#3b82f6', '#8b5cf6', '#fbbf24', '#06b6d4'][Math.floor(Math.random() * 4)];
+                particle.style.animationDelay = (i * 0.1) + 's';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 3000);
+            }
+        }
+        
+        // Add floating animation to more elements
+        function addFloatingAnimations() {
+            const elements = document.querySelectorAll('.btn-3d, .card-hover');
+            elements.forEach((element, index) => {
+                element.style.animation += `, float ${6 + (index % 3)}s ease-in-out infinite`;
+                element.style.animationDelay = (index * 0.5) + 's';
+            });
+        }
+        
+        // Page Navigation Functions
+        function enterExperience() {
+            playButtonSound();
+            
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+            
+            // Fade out page 1
+            page1.classList.add('hidden');
+            
+            // Show page 2 after transition
+            setTimeout(() => {
+                page1.style.display = 'none';
+                page2.style.display = 'block';
+                page2.classList.remove('hidden');
+                page2.classList.add('fade-in');
+                
+                // Scroll to top of page 2
+                window.scrollTo(0, 0);
+            }, 800);
+        }
+        
+        function goToPage1() {
+            playButtonSound();
+            
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+            
+            // Fade out page 2
+            page2.classList.add('hidden');
+            
+            // Show page 1 after transition
+            setTimeout(() => {
+                page2.style.display = 'none';
+                page1.style.display = 'block';
+                page1.classList.remove('hidden');
+                page1.classList.add('fade-in');
+                
+                // Scroll to top of page 1
+                window.scrollTo(0, 0);
+            }, 800);
+        }
+        
+        // Initialize stars and voice features when page loads
+        window.addEventListener('load', function() {
+            createStars();
+            initSpeechRecognition();
+            addSoundEffects();
+            addFloatingAnimations();
+            updateCharacterCounter();
+            
+            // Ensure page 1 is visible on load
+            document.getElementById('page1').classList.remove('hidden');
+        });
+        
+        // Fill suggestion function
+        function fillSuggestion(text) {
+            const textarea = document.getElementById('emotionInput');
+            textarea.value = text;
+            
+            // Update character counter
+            const charCount = document.getElementById('charCount');
+            if (charCount) {
+                const count = text.length;
+                charCount.textContent = count;
+                
+                // Change color based on length
+                if (count > 500) {
+                    charCount.style.color = 'rgba(251, 191, 36, 0.9)';
+                } else if (count > 200) {
+                    charCount.style.color = 'rgba(139, 92, 246, 0.9)';
+                } else {
+                    charCount.style.color = 'rgba(139, 92, 246, 0.7)';
+                }
+            }
+            
+            // Focus on textarea and play sound
+            textarea.focus();
+            playClickSound();
+            
+            // Add a subtle animation to show the text was filled
+            textarea.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                textarea.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9652b38233efc8f4',t:'MTc1MzUyMDM2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
